@@ -1,4 +1,4 @@
-import { Model, Schema, models, model } from 'mongoose';
+import { Model, Schema, models, model, isValidObjectId } from 'mongoose';
 
 abstract class VehicleODM<T> {
   protected model: Model<T>;
@@ -13,6 +13,15 @@ abstract class VehicleODM<T> {
 
   public async create(obj: T): Promise<T> {
     return this.model.create({ ...obj });
+  }
+
+  public async getAll(): Promise<T[]> {
+    return this.model.find();
+  }
+
+  public async getByid(id: string): Promise<T[] | null> {
+    if (!isValidObjectId(id)) throw Error('Invalid mongo id');
+    return this.model.find();
   }
 }
 export default VehicleODM;
