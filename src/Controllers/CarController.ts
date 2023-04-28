@@ -32,17 +32,35 @@ class CarController {
       const newCar = await this.service.register(car);
       return this.res.status(201).json(newCar);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       
       this.next(error);
     }
   }
 
-  // public async getByValue() {
-  //   const { value } = this.req.params;
-  //   const key = await this.service.getByValue(value);
-  //   return this.res.status(200).json(key); 
-  // }
+  public async getAll() {
+    try {
+      const cars = await this.service.getAll();
+      console.log(cars);
+      
+      return this.res.status(200).json(cars);
+    } catch (error) {
+      this.next(error);
+    }
+  }
+
+  public async getById() {
+    const { id } = this.req.params;
+    try {
+      const carId = await this.service.getById(id);
+      if (carId) {
+        return this.res.status(200).json(carId);
+      }
+      return this.res.status(404).json({ message: 'Car not found' });
+    } catch (error: any) {
+      return this.res.status(422).json({ message: error.message });
+    }
+  }
 }
 
 export default CarController;

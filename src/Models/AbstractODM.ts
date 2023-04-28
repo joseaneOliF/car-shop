@@ -19,9 +19,11 @@ abstract class VehicleODM<T> {
     return this.model.find();
   }
 
-  public async getByid(id: string): Promise<T[] | null> {
+  public async getById(id: string): Promise<T | null> {
     if (!isValidObjectId(id)) throw Error('Invalid mongo id');
-    return this.model.find();
+    return this.model.findById(id);
   }
 }
+
+/* Promise<T | null> */
 export default VehicleODM;

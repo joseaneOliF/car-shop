@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 import ICar from '../Interfaces/ICar';
-import VehicleODM from './VehicleODM';
+import VehicleODM from './AbstractODM';
 
 class CarODM extends VehicleODM<ICar> {
   constructor() {
@@ -8,7 +8,7 @@ class CarODM extends VehicleODM<ICar> {
       model: { type: String, required: true },
       year: { type: Number, required: true },
       color: { type: String, required: true },
-      status: { type: Number, required: false },
+      status: { type: Boolean, required: false },
       buyValue: { type: Number, required: true },
       doorsQty: { type: Number, required: true },
       seatsQty: { type: Number, required: true },
