@@ -65,6 +65,15 @@ describe('Camada Service', function () {
 
       expect(result).to.be.deep.equal(carOutput);
     });
+
+    it('Atualiza um carro com sucesso', async function () {
+      const carOutput = new Car({ id: '644bd1418f6917399103e3c8', ...carInput });
+      sinon.stub(Model, 'findByIdAndUpdate').resolves(carOutput);
+      
+      const result = await service.updateService('644bd1418f6917399103e3c8', carInput);
+
+      expect(result).to.be.deep.equal(carOutput);
+    });
   });
 
   describe('Casos de erro ou parâmetros inválidos', function () {
