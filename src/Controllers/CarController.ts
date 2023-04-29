@@ -56,6 +56,7 @@ class CarController {
       if (carId) {
         return this.res.status(200).json(carId);
       }
+      return this.res.status(404).json({ message: 'Car not found' });
     } catch (error: any) {
       return this.res.status(422).json({ message: error.message });
     }
