@@ -1,6 +1,6 @@
 import { Model, Schema, models, model, isValidObjectId, UpdateQuery } from 'mongoose';
 
-abstract class VehicleODM<T> {
+abstract class AbstractODM<T> {
   protected model: Model<T>;
   protected schema: Schema;
   protected modelName: string;
@@ -26,7 +26,7 @@ abstract class VehicleODM<T> {
 
   public async update(id: string, obj: Partial<T>):
   Promise<T | null> {
-    if (!isValidObjectId(id)) throw Error('Invalid Mongo id');
+    if (!isValidObjectId(id)) throw Error('Invalid mongo id');
 
     return this.model.findByIdAndUpdate(
       { _id: id },
@@ -36,4 +36,4 @@ abstract class VehicleODM<T> {
   }
 }
 
-export default VehicleODM;
+export default AbstractODM;

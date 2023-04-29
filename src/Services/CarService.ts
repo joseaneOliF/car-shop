@@ -1,5 +1,6 @@
 import Car from '../Domains/Car';
 import ICar from '../Interfaces/ICar';
+// import HttpException from '../Middlewares/HttpException';
 import CarODM from '../Models/CarODM';
 
 class CarService {
@@ -34,8 +35,11 @@ class CarService {
 
   public async updateService(id: string, car: ICar): Promise <Car | null> {
     const carODM = new CarODM();
-    await carODM.update(id, car);
-    const carUpdated = await carODM.getById(id);
+    // const isCar = await carODM.getById(id);
+    // if (!isCar) throw new HttpException(404, 'Car not found');
+   
+    const carUpdated = await carODM.update(id, car);
+    
     return this.createCarDomain(carUpdated);
   }
 }

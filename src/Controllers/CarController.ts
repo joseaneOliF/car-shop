@@ -56,26 +56,25 @@ class CarController {
       if (carId) {
         return this.res.status(200).json(carId);
       }
-      return this.res.status(404).json({ message: 'Car not found' });
     } catch (error: any) {
       return this.res.status(422).json({ message: error.message });
     }
   }
 
   public async updateController() {
+    const car: ICar = this.req.body;
+    const { id } = this.req.params;
     try {
-      const { id } = this.req.params;
-      const car: ICar = this.req.body;
       const carUpdated = await this.service.updateService(id, car);
-      
-      if (carUpdated) {
-        return this.res.status(200).json(carUpdated);
+      if (!carUpdated) {
+        return this.res.status(404).json({ message: 'Car not found' });
       }
-      return this.res.status(404).json('Car nor found');
+      return this.res.status(200).json(carUpdated);
     } catch (error: any) {
       return this.res.status(422).json({ message: error.message });
     }
   }
+  // this.res.status(200).json('Sucesso');
 }
 
 export default CarController;
