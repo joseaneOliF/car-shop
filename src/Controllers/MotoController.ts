@@ -35,5 +35,16 @@ class MotoController {
       this.next(error);
     }
   }
+
+  public async getAll() {
+    try {
+      const motos = await this.service.getAll();
+      // console.log(motos);
+      
+      return this.res.status(200).json(motos);
+    } catch (error) {
+      this.next(error);
+    }
+  }
 }
 export default MotoController;
